@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { Perfume } from '@/lib/types';
-import { Button } from '@/components/ui/button';
-import { formatPrice } from '@/lib/utils';
-import { Edit, Trash2, Plus, Check, X } from 'lucide-react';
+import { useState } from "react";
+import { Perfume } from "@/lib/types";
+import { collections } from "@/lib/mockData";
+import { Button } from "@/components/ui/button";
+import { formatPrice } from "@/lib/utils";
+import { Edit, Trash2, Plus, Check, X } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -10,7 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,28 +22,38 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { PerfumeForm } from './PerfumeForm';
+} from "@/components/ui/dialog";
+import { PerfumeForm } from "./PerfumeForm";
 
 interface PerfumeListProps {
   perfumes: Perfume[];
-  onAdd: (perfume: Omit<Perfume, 'id'>) => void;
+  onAdd: (perfume: Omit<Perfume, "id">) => void;
   onEdit: (perfume: Perfume) => void;
   onDelete: (id: number) => void;
 }
 
-export function AdminPerfumeList({ perfumes, onAdd, onEdit, onDelete }: PerfumeListProps) {
-  const [openDialogId, setOpenDialogId] = useState<'new' | number | null>(null);
+export function AdminPerfumeList({
+  perfumes,
+  onAdd,
+  onEdit,
+  onDelete,
+}: PerfumeListProps) {
+  const [openDialogId, setOpenDialogId] = useState<"new" | number | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
 
-  const handleAdd = (perfume: Omit<Perfume, 'id'>) => {
+  const getCollectionName = (collectionId: string) => {
+    const collection = collections.find((c) => c.id === collectionId);
+    return collection?.name || collectionId;
+  };
+
+  const handleAdd = (perfume: Omit<Perfume, "id">) => {
     onAdd(perfume);
     setOpenDialogId(null);
   };
@@ -62,9 +73,16 @@ export function AdminPerfumeList({ perfumes, onAdd, onEdit, onDelete }: PerfumeL
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-elysian-white-soft">Gestión de Perfumes</h2>
-        
-        <Dialog open={openDialogId === 'new'} onOpenChange={(open) => open ? setOpenDialogId('new') : setOpenDialogId(null)}>
+        <h2 className="text-2xl font-bold text-elysian-white-soft">
+          Gestión de Perfumes
+        </h2>
+
+        <Dialog
+          open={openDialogId === "new"}
+          onOpenChange={(open) =>
+            open ? setOpenDialogId("new") : setOpenDialogId(null)
+          }
+        >
           <DialogTrigger asChild>
             <Button className="bg-elysian-gold hover:bg-elysian-gold-light text-elysian-background">
               <Plus className="h-4 w-4 mr-2" />
@@ -73,16 +91,18 @@ export function AdminPerfumeList({ perfumes, onAdd, onEdit, onDelete }: PerfumeL
           </DialogTrigger>
           <DialogContent className="bg-elysian-background border-elysian-gold/20 text-elysian-white-soft max-w-2xl">
             <DialogHeader>
-              <DialogTitle className="text-elysian-gold">Crear Nuevo Perfume</DialogTitle>
+              <DialogTitle className="text-elysian-gold">
+                Crear Nuevo Perfume
+              </DialogTitle>
             </DialogHeader>
-            <PerfumeForm 
+            <PerfumeForm
               onSubmit={handleAdd}
               onCancel={() => setOpenDialogId(null)}
             />
           </DialogContent>
         </Dialog>
       </div>
-      
+
       <div className="rounded-md border border-elysian-gold/20 overflow-hidden">
         <Table>
           <TableHeader className="bg-elysian-gray-dark">
@@ -92,30 +112,36 @@ export function AdminPerfumeList({ perfumes, onAdd, onEdit, onDelete }: PerfumeL
               <TableHead className="text-elysian-gold">Género</TableHead>
               <TableHead className="text-elysian-gold">Precio</TableHead>
               <TableHead className="text-elysian-gold">Destacado</TableHead>
-              <TableHead className="text-elysian-gold text-right">Acciones</TableHead>
+              <TableHead className="text-elysian-gold text-right">
+                Acciones
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {perfumes.map((perfume) => (
-              <TableRow 
+              <TableRow
                 key={perfume.id}
                 className="border-b-elysian-gold/10 hover:bg-elysian-gray-dark/50"
               >
                 <TableCell>
                   <div className="w-12 h-12 rounded overflow-hidden">
-                    <img 
-                      src={perfume.image} 
-                      alt={perfume.name} 
+                    <img
+                      src={perfume.image}
+                      alt={perfume.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
                 </TableCell>
                 <TableCell className="font-medium text-elysian-white-soft">
                   {perfume.name}
-                  <div className="text-xs text-elysian-white-soft/70">{perfume.brand}</div>
+                  <div className="text-xs text-elysian-white-soft/70">
+                    {getCollectionName(perfume.collection)}
+                  </div>
                 </TableCell>
                 <TableCell>{perfume.gender}</TableCell>
-                <TableCell className="text-elysian-gold">{formatPrice(perfume.price)}</TableCell>
+                <TableCell className="text-elysian-gold">
+                  {formatPrice(perfume.price)}
+                </TableCell>
                 <TableCell>
                   {perfume.featured ? (
                     <Check className="h-5 w-5 text-green-500" />
@@ -125,13 +151,17 @@ export function AdminPerfumeList({ perfumes, onAdd, onEdit, onDelete }: PerfumeL
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end space-x-2">
-                    <Dialog 
-                      open={openDialogId === perfume.id} 
-                      onOpenChange={(open) => open ? setOpenDialogId(perfume.id) : setOpenDialogId(null)}
+                    <Dialog
+                      open={openDialogId === perfume.id}
+                      onOpenChange={(open) =>
+                        open
+                          ? setOpenDialogId(perfume.id)
+                          : setOpenDialogId(null)
+                      }
                     >
                       <DialogTrigger asChild>
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           size="sm"
                           className="border-elysian-gold/50 text-elysian-gold hover:bg-elysian-gold/10"
                         >
@@ -140,37 +170,46 @@ export function AdminPerfumeList({ perfumes, onAdd, onEdit, onDelete }: PerfumeL
                       </DialogTrigger>
                       <DialogContent className="bg-elysian-background border-elysian-gold/20 text-elysian-white-soft max-w-2xl">
                         <DialogHeader>
-                          <DialogTitle className="text-elysian-gold">Editar Perfume</DialogTitle>
+                          <DialogTitle className="text-elysian-gold">
+                            Editar Perfume
+                          </DialogTitle>
                         </DialogHeader>
-                        <PerfumeForm 
+                        <PerfumeForm
                           perfume={perfume}
-                          onSubmit={(updatedPerfume) => handleEdit({ ...updatedPerfume, id: perfume.id })}
+                          onSubmit={(updatedPerfume) =>
+                            handleEdit({ ...updatedPerfume, id: perfume.id })
+                          }
                           onCancel={() => setOpenDialogId(null)}
                         />
                       </DialogContent>
                     </Dialog>
-                    
-                    <AlertDialog open={deleteId === perfume.id} onOpenChange={(open) => open ? setDeleteId(perfume.id) : setDeleteId(null)}>
+
+                    <AlertDialog
+                      open={deleteId === perfume.id}
+                      onOpenChange={(open) =>
+                        open ? setDeleteId(perfume.id) : setDeleteId(null)
+                      }
+                    >
                       <AlertDialogTrigger asChild>
-                        <Button 
-                          variant="destructive" 
-                          size="sm"
-                        >
+                        <Button variant="destructive" size="sm">
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent className="bg-elysian-background border-elysian-gold/20 text-elysian-white-soft">
                         <AlertDialogHeader>
-                          <AlertDialogTitle className="text-elysian-gold">Confirmar Eliminación</AlertDialogTitle>
+                          <AlertDialogTitle className="text-elysian-gold">
+                            Confirmar Eliminación
+                          </AlertDialogTitle>
                           <AlertDialogDescription className="text-elysian-white-soft/70">
-                            ¿Está seguro de que desea eliminar el perfume "{perfume.name}"? Esta acción no se puede deshacer.
+                            ¿Está seguro de que desea eliminar el perfume "
+                            {perfume.name}"? Esta acción no se puede deshacer.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel className="border-elysian-gold/50 text-elysian-white-soft hover:bg-elysian-gold/10">
                             Cancelar
                           </AlertDialogCancel>
-                          <AlertDialogAction 
+                          <AlertDialogAction
                             className="bg-red-600 hover:bg-red-700 text-white"
                             onClick={handleDelete}
                           >

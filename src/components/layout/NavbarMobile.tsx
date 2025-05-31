@@ -31,7 +31,9 @@ export function NavbarMobile() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="py-3 bg-black/70 backdrop-blur-md sticky top-0 z-50"> {/* Updated nav style */}
+    <nav className="py-3 bg-black/70 backdrop-blur-md sticky top-0 z-50">
+      {" "}
+      {/* Updated nav style */}
       <div className="container-custom flex items-center justify-between">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
@@ -46,14 +48,16 @@ export function NavbarMobile() {
             <SheetHeader>
               <SheetTitle className="text-elysian-gold">Menú</SheetTitle>
             </SheetHeader>
-            <div className="mt-8 flex flex-col space-y-2"> {/* Reduced space-y for tighter packing with new padding */}
+            <div className="mt-8 flex flex-col space-y-2">
+              {" "}
+              {/* Reduced space-y for tighter packing with new padding */}
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   `flex items-center py-3 px-3 w-full rounded-md text-base ${
                     isActive
-                      ? 'text-elysian-gold bg-white/5'
-                      : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                      ? "text-elysian-gold bg-white/5"
+                      : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                   }`
                 }
                 onClick={closeMenu}
@@ -66,8 +70,8 @@ export function NavbarMobile() {
                 className={({ isActive }) =>
                   `flex items-center py-3 px-3 w-full rounded-md text-base ${
                     isActive
-                      ? 'text-elysian-gold bg-white/5'
-                      : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                      ? "text-elysian-gold bg-white/5"
+                      : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                   }`
                 }
                 onClick={closeMenu}
@@ -80,8 +84,8 @@ export function NavbarMobile() {
                 className={({ isActive }) =>
                   `flex items-center py-3 px-3 w-full rounded-md text-base ${
                     isActive
-                      ? 'text-elysian-gold bg-white/5'
-                      : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                      ? "text-elysian-gold bg-white/5"
+                      : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                   }`
                 }
                 onClick={closeMenu}
@@ -94,8 +98,8 @@ export function NavbarMobile() {
                 className={({ isActive }) =>
                   `flex items-center py-3 px-3 w-full rounded-md text-base ${
                     isActive
-                      ? 'text-elysian-gold bg-white/5'
-                      : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                      ? "text-elysian-gold bg-white/5"
+                      : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                   }`
                 }
                 onClick={closeMenu}
@@ -103,9 +107,7 @@ export function NavbarMobile() {
                 <Mail className="mr-3 h-5 w-5 text-elysian-gold" />
                 <span>Contacto</span>
               </NavLink>
-
               <Separator className="bg-elysian-gold/20 my-2" />
-
               {user ? (
                 <>
                   <NavLink
@@ -113,8 +115,8 @@ export function NavbarMobile() {
                     className={({ isActive }) =>
                       `flex items-center py-3 px-3 w-full rounded-md text-base ${
                         isActive
-                          ? 'text-elysian-gold bg-white/5'
-                          : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                          ? "text-elysian-gold bg-white/5"
+                          : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                       }`
                     }
                     onClick={closeMenu}
@@ -127,8 +129,8 @@ export function NavbarMobile() {
                     className={({ isActive }) =>
                       `flex items-center py-3 px-3 w-full rounded-md text-base ${
                         isActive
-                          ? 'text-elysian-gold bg-white/5'
-                          : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                          ? "text-elysian-gold bg-white/5"
+                          : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                       }`
                     }
                     onClick={closeMenu}
@@ -142,13 +144,14 @@ export function NavbarMobile() {
                       className={({ isActive }) =>
                         `flex items-center py-3 px-3 w-full rounded-md text-base ${
                           isActive
-                            ? 'text-elysian-gold bg-white/5'
-                            : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                            ? "text-elysian-gold bg-white/5"
+                            : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                         }`
                       }
                       onClick={closeMenu}
                     >
-                      <span className="mr-3 text-elysian-gold">⚙️</span> {/* Adjusted mr for consistency */}
+                      <span className="mr-3 text-elysian-gold">⚙️</span>{" "}
+                      {/* Adjusted mr for consistency */}
                       <span>Administración</span>
                     </NavLink>
                   )}
@@ -169,8 +172,8 @@ export function NavbarMobile() {
                   className={({ isActive }) =>
                     `flex items-center py-3 px-3 w-full rounded-md text-base ${
                       isActive
-                        ? 'text-elysian-gold bg-white/5'
-                        : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                        ? "text-elysian-gold bg-white/5"
+                        : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                     }`
                   }
                   onClick={closeMenu}
@@ -188,7 +191,10 @@ export function NavbarMobile() {
         </Link>
 
         <Link to="/carrito">
-          <Button variant="ghost" className="relative hover:bg-white/10 p-2 rounded-full"> {/* Applied desktop cart button style */}
+          <Button
+            variant="ghost"
+            className="relative hover:bg-white/10 p-2 rounded-full"
+          >
             <ShoppingBag className="h-5 w-5 text-elysian-gold" />
             {totalItems > 0 && (
               <Badge className="absolute -top-2 -right-2 bg-elysian-gold text-elysian-background">

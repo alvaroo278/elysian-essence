@@ -1,8 +1,8 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, User, LogOut } from "lucide-react";
-import { Link, NavLink } from "react-router-dom"; // Changed Link to NavLink
+import { ShoppingBag, User, LogOut, ChevronDown } from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,39 +12,196 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { collections, perfumes } from "@/lib/mockData";
+import { useState } from "react";
 
 export function NavbarDesktop() {
   const { user, logout, isAdmin } = useAuth();
   const { totalItems } = useCart();
+  const navigate = useNavigate();
+  const [hoveredGender, setHoveredGender] = useState<string | null>(null);
+
+  // Obtener colecciones que tienen productos para cada género
+  const getCollectionsForGender = (gender: "Hombre" | "Mujer") => {
+    const genderCollections = new Set();
+    perfumes
+      .filter((perfume) => perfume.gender === gender)
+      .forEach((perfume) => genderCollections.add(perfume.collection));
+
+    return collections.filter((collection) =>
+      genderCollections.has(collection.id)
+    );
+  };
+
+  const menCollections = getCollectionsForGender("Hombre");
+  const womenCollections = getCollectionsForGender("Mujer");
+
+  const handleCollectionClick = (
+    collectionId: string,
+    gender: "Hombre" | "Mujer"
+  ) => {
+    navigate(`/catalogo?gender=${gender}&collection=${collectionId}`);
+  };
+
+  const handleGenderClick = (gender: "Hombre" | "Mujer") => {
+    navigate(`/catalogo?gender=${gender}`);
+  };
 
   return (
-    <nav className="py-3 bg-black/70 backdrop-blur-md sticky top-0 z-50"> {/* Updated nav style */}
+    <nav className="py-3 bg-black/70 backdrop-blur-md sticky top-0 z-50">
+      {" "}
+      {/* Updated nav style */}
       <div className="container-custom flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <span className="text-2xl font-bold gold-text">Elysian Essence</span>
         </Link>
 
         <div className="flex-grow flex justify-center">
-          <div className="flex items-center space-x-6"> {/* Changed space-x-10 to space-x-6 */}
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
-                  isActive
-                    ? 'text-elysian-gold bg-white/5'
-                    : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
-                }`
-              }
+          <div className="flex items-center space-x-6">
+            {" "}
+            {/* Menú desplegable para Él */}
+            <div
+              className="relative group"
+              onMouseEnter={() => setHoveredGender("Hombre")}
+              onMouseLeave={() => setHoveredGender(null)}
             >
-              Inicio
-            </NavLink>
+              <button
+                onClick={() => handleGenderClick("Hombre")}
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 text-elysian-white-soft hover:text-white hover:bg-white/5 group-hover:text-elysian-gold"
+              >
+                Él
+                <ChevronDown className="ml-1 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
+              </button>
+
+              {/* Dropdown Menu para Él */}
+              <div
+                className={`absolute top-full left-0 mt-1 w-64 bg-black/95 backdrop-blur-md border border-white/10 rounded-lg shadow-xl transition-all duration-200 ${
+                  hoveredGender === "Hombre"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                <div className="p-3">
+                  <div className="text-xs text-elysian-gold font-semibold mb-2 uppercase tracking-wider">
+                    Colecciones para Él
+                  </div>
+                  <div className="space-y-1">
+                    {menCollections.map((collection) => (
+                      <button
+                        key={collection.id}
+                        onClick={() =>
+                          handleCollectionClick(collection.id, "Hombre")
+                        }
+                        className="w-full text-left px-3 py-2 text-sm text-elysian-white-soft hover:text-white hover:bg-elysian-gold/20 rounded-md transition-all duration-150 flex items-center group/item"
+                      >
+                        <div className="w-6 h-6 mr-3 bg-white/10 rounded-md flex items-center justify-center overflow-hidden group-hover/item:bg-white/20 transition-all duration-150">
+                          <img
+                            src={collection.logo}
+                            alt={`${collection.name} logo`}
+                            className="w-4 h-4 object-contain filter brightness-0 invert opacity-80 group-hover/item:opacity-100 transition-opacity duration-150"
+                            onError={(e) => {
+                              // Fallback si la imagen no carga
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = "none";
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `<span class="text-xs font-bold text-elysian-gold">${collection.name.charAt(
+                                  0
+                                )}</span>`;
+                              }
+                            }}
+                          />
+                        </div>
+                        <span className="font-medium">{collection.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-3 pt-2 border-t border-white/10">
+                    <button
+                      onClick={() => handleGenderClick("Hombre")}
+                      className="w-full text-center px-3 py-2 text-sm text-elysian-gold hover:bg-elysian-gold/20 rounded-md transition-all duration-150 font-medium"
+                    >
+                      Ver todo para Él →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Menú desplegable para Ella */}
+            <div
+              className="relative group"
+              onMouseEnter={() => setHoveredGender("Mujer")}
+              onMouseLeave={() => setHoveredGender(null)}
+            >
+              <button
+                onClick={() => handleGenderClick("Mujer")}
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 text-elysian-white-soft hover:text-white hover:bg-white/5 group-hover:text-elysian-gold"
+              >
+                Ella
+                <ChevronDown className="ml-1 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
+              </button>
+
+              {/* Dropdown Menu para Ella */}
+              <div
+                className={`absolute top-full left-0 mt-1 w-64 bg-black/95 backdrop-blur-md border border-white/10 rounded-lg shadow-xl transition-all duration-200 ${
+                  hoveredGender === "Mujer"
+                    ? "opacity-100 visible translate-y-0"
+                    : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                <div className="p-3">
+                  <div className="text-xs text-elysian-gold font-semibold mb-2 uppercase tracking-wider">
+                    Colecciones para Ella
+                  </div>
+                  <div className="space-y-1">
+                    {womenCollections.map((collection) => (
+                      <button
+                        key={collection.id}
+                        onClick={() =>
+                          handleCollectionClick(collection.id, "Mujer")
+                        }
+                        className="w-full text-left px-3 py-2 text-sm text-elysian-white-soft hover:text-white hover:bg-elysian-gold/20 rounded-md transition-all duration-150 flex items-center group/item"
+                      >
+                        <div className="w-6 h-6 mr-3 bg-white/10 rounded-md flex items-center justify-center overflow-hidden group-hover/item:bg-white/20 transition-all duration-150">
+                          <img
+                            src={collection.logo}
+                            alt={`${collection.name} logo`}
+                            className="w-4 h-4 object-contain filter brightness-0 invert opacity-80 group-hover/item:opacity-100 transition-opacity duration-150"
+                            onError={(e) => {
+                              // Fallback si la imagen no carga
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = "none";
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `<span class="text-xs font-bold text-elysian-gold">${collection.name.charAt(
+                                  0
+                                )}</span>`;
+                              }
+                            }}
+                          />
+                        </div>
+                        <span className="font-medium">{collection.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-3 pt-2 border-t border-white/10">
+                    <button
+                      onClick={() => handleGenderClick("Mujer")}
+                      className="w-full text-center px-3 py-2 text-sm text-elysian-gold hover:bg-elysian-gold/20 rounded-md transition-all duration-150 font-medium"
+                    >
+                      Ver todo para Ella →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <NavLink
               to="/catalogo"
               className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
                   isActive
-                    ? 'text-elysian-gold bg-white/5'
-                    : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                    ? "text-elysian-gold bg-white/5"
+                    : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                 }`
               }
             >
@@ -55,8 +212,8 @@ export function NavbarDesktop() {
               className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
                   isActive
-                    ? 'text-elysian-gold bg-white/5'
-                    : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                    ? "text-elysian-gold bg-white/5"
+                    : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                 }`
               }
             >
@@ -67,17 +224,19 @@ export function NavbarDesktop() {
               className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
                   isActive
-                    ? 'text-elysian-gold bg-white/5'
-                    : 'text-elysian-white-soft hover:text-white hover:bg-white/5'
+                    ? "text-elysian-gold bg-white/5"
+                    : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                 }`
               }
             >
               Contacto
-            </Link>
+            </NavLink>
           </div>
         </div>
 
-        <div className="flex items-center space-x-4"> {/* User/Cart actions */}
+        <div className="flex items-center space-x-4">
+          {" "}
+          {/* User/Cart actions */}
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -94,18 +253,24 @@ export function NavbarDesktop() {
               >
                 <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-elysian-gold/20" />
-                <DropdownMenuItem className="hover:bg-elysian-gold/20"> {/* Updated hover style */}
+                <DropdownMenuItem className="hover:bg-elysian-gold/20">
+                  {" "}
+                  {/* Updated hover style */}
                   <Link to="/perfil" className="w-full">
                     Perfil
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-elysian-gold/20"> {/* Updated hover style */}
+                <DropdownMenuItem className="hover:bg-elysian-gold/20">
+                  {" "}
+                  {/* Updated hover style */}
                   <Link to="/pedidos" className="w-full">
                     Mis Pedidos
                   </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
-                  <DropdownMenuItem className="hover:bg-elysian-gold/20"> {/* Updated hover style */}
+                  <DropdownMenuItem className="hover:bg-elysian-gold/20">
+                    {" "}
+                    {/* Updated hover style */}
                     <Link to="/admin" className="w-full">
                       Administración
                     </Link>
@@ -130,12 +295,18 @@ export function NavbarDesktop() {
               </Button>
             </Link>
           )}
-
           <Link to="/carrito">
-            <Button variant="ghost" className="relative hover:bg-white/10 p-2 rounded-full"> {/* Updated Cart Button */}
+            <Button
+              variant="ghost"
+              className="relative hover:bg-white/10 p-2 rounded-full"
+            >
+              {" "}
+              {/* Updated Cart Button */}
               <ShoppingBag className="h-5 w-5 text-elysian-gold" />
               {totalItems > 0 && (
-                <Badge className="absolute -top-2 -right-2 bg-elysian-gold text-elysian-background"> {/* Badge style remains same, seems fine */}
+                <Badge className="absolute -top-2 -right-2 bg-elysian-gold text-elysian-background">
+                  {" "}
+                  {/* Badge style remains same, seems fine */}
                   {totalItems}
                 </Badge>
               )}

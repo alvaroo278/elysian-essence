@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Container } from "@/components/ui/container";
 import { PerfumeList } from "@/components/product/PerfumeList";
 import { Perfume, Collection } from "@/lib/types";
@@ -10,9 +11,11 @@ import { Label } from "@/components/ui/label";
 import { Search } from "lucide-react";
 
 export function CatalogPage() {
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [activeGenderTab, setActiveGenderTab] = useState<string>("todos");
   const [searchQuery, setSearchQuery] = useState("");
+  const collectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   // Calculate initial min/max prices for the slider
   const { minPrice, maxPrice } = useMemo(() => {
@@ -37,6 +40,35 @@ export function CatalogPage() {
   useEffect(() => {
     setPriceRange([minPrice, maxPrice]);
   }, [minPrice, maxPrice]);
+
+  // Handle URL parameters on component mount and parameter changes
+  useEffect(() => {
+    const genderParam = searchParams.get("gender");
+    const collectionParam = searchParams.get("collection");
+
+    // Set gender tab based on URL parameter
+    if (genderParam) {
+      if (genderParam === "Hombre") {
+        setActiveGenderTab("hombre");
+      } else if (genderParam === "Mujer") {
+        setActiveGenderTab("mujer");
+      }
+    }
+
+    // Scroll to collection after a short delay to ensure content is rendered
+    if (collectionParam) {
+      setTimeout(() => {
+        const collectionElement = collectionRefs.current[collectionParam];
+        if (collectionElement) {
+          collectionElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }, 600); // Delay to ensure loading animation completes
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     // Simulate loading from API - kept for spinner effect
@@ -180,7 +212,13 @@ export function CatalogPage() {
               // Conditionally render collection section only if there are perfumes for it
               if (collectionPerfumes.length > 0) {
                 return (
-                  <section key={collection.id} className="mb-12">
+                  <section
+                    key={collection.id}
+                    className="mb-12"
+                    ref={(el) => {
+                      collectionRefs.current[collection.id] = el;
+                    }}
+                  >
                     <img
                       src={collection.logo}
                       alt={`${collection.name} logo`}

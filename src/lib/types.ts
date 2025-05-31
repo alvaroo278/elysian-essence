@@ -1,11 +1,25 @@
+export type CollectionId =
+  | "lattafa"
+  | "armaf"
+  | "swiss-arabian"
+  | "french-avenue"
+  | "emper"
+  | "camara-perfumes";
+
+export interface Collection {
+  id: CollectionId;
+  name: string;
+  logo: string;
+}
+
 export interface Perfume {
   id: number;
   name: string;
-  brand: string;
+  collection: CollectionId;
   description: string;
   price: number;
   image: string;
-  gender: 'Hombre' | 'Mujer';
+  gender: "Hombre" | "Mujer" | "Unisex";
   featured?: boolean;
   rating?: number;
   notes?: string[];

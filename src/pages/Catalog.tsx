@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Container } from '@/components/ui/container';
-import { PerfumeList } from '@/components/product/PerfumeList';
-import { Perfume, Collection } from '@/lib/types';
-import { perfumes as mockPerfumes, collections } from '@/lib/mockData';
+import { useState, useEffect, useMemo } from "react";
+import { Container } from "@/components/ui/container";
+import { PerfumeList } from "@/components/product/PerfumeList";
+import { Perfume, Collection } from "@/lib/types";
+import { perfumes as mockPerfumes, collections } from "@/lib/mockData";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,23 +11,27 @@ import { Search } from "lucide-react";
 
 export function CatalogPage() {
   const [loading, setLoading] = useState(true);
-  const [activeGenderTab, setActiveGenderTab] = useState<string>('todos');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [activeGenderTab, setActiveGenderTab] = useState<string>("todos");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Calculate initial min/max prices for the slider
   const { minPrice, maxPrice } = useMemo(() => {
     if (!mockPerfumes || mockPerfumes.length === 0) {
       return { minPrice: 0, maxPrice: 100 }; // Default if no perfumes
     }
-    const prices = mockPerfumes.map(p => p.price);
+    const prices = mockPerfumes.map((p) => p.price);
     return {
       minPrice: Math.min(...prices),
       maxPrice: Math.max(...prices),
     };
   }, []); // mockPerfumes is static, so this runs once
 
-  const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
-  const [globalFilteredPerfumes, setGlobalFilteredPerfumes] = useState<Perfume[]>(mockPerfumes);
+  const [priceRange, setPriceRange] = useState<[number, number]>([
+    minPrice,
+    maxPrice,
+  ]);
+  const [globalFilteredPerfumes, setGlobalFilteredPerfumes] =
+    useState<Perfume[]>(mockPerfumes);
 
   // Set initial price range once minPrice and maxPrice are calculated
   useEffect(() => {
@@ -47,12 +51,13 @@ export function CatalogPage() {
 
     // Filter by gender tab
     if (activeGenderTab !== "todos") {
-      result = result.filter((perfume) =>
-        activeGenderTab === "hombre"
-          ? perfume.gender === "Hombre" || perfume.gender === "Unisex"
-          : activeGenderTab === "mujer"
-          ? perfume.gender === "Mujer" || perfume.gender === "Unisex"
-          : true // Should not happen with current tabs
+      result = result.filter(
+        (perfume) =>
+          activeGenderTab === "hombre"
+            ? perfume.gender === "Hombre" || perfume.gender === "Unisex"
+            : activeGenderTab === "mujer"
+            ? perfume.gender === "Mujer" || perfume.gender === "Unisex"
+            : true // Should not happen with current tabs
       );
     }
 
@@ -60,7 +65,8 @@ export function CatalogPage() {
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       result = result.filter((perfume) => {
-        const collectionName = collections.find(c => c.id === perfume.collection)?.name || "";
+        const collectionName =
+          collections.find((c) => c.id === perfume.collection)?.name || "";
         return (
           perfume.name.toLowerCase().includes(query) ||
           collectionName.toLowerCase().includes(query)
@@ -85,7 +91,8 @@ export function CatalogPage() {
             Catálogo de Perfumes
           </h1>
           <p className="text-elysian-white-soft/80 max-w-2xl mx-auto">
-            Descubre nuestra colección exclusiva de fragancias creadas con los ingredientes más selectos.
+            Descubre nuestra colección exclusiva de fragancias creadas con los
+            ingredientes más selectos.
           </p>
         </div>
 
@@ -144,7 +151,9 @@ export function CatalogPage() {
                 max={maxPrice}
                 step={1} // Adjusted step for potentially finer control
                 value={priceRange}
-                onValueChange={(value) => setPriceRange(value as [number, number])}
+                onValueChange={(value) =>
+                  setPriceRange(value as [number, number])
+                }
                 className="[&>.SliderTrack]:bg-elysian-gold/30 [&>.SliderRange]:bg-elysian-gold [&>.SliderThumb]:border-elysian-gold"
               />
             </div>
@@ -158,22 +167,25 @@ export function CatalogPage() {
         ) : (
           <div>
             {globalFilteredPerfumes.length === 0 && (
-                 <div className="text-center py-12">
-                    <p className="text-elysian-white-soft text-lg">
-                        No se encontraron perfumes con los filtros seleccionados.
-                    </p>
-                 </div>
+              <div className="text-center py-12">
+                <p className="text-elysian-white-soft text-lg">
+                  No se encontraron perfumes con los filtros seleccionados.
+                </p>
+              </div>
             )}
             {collections.map((collection: Collection) => {
-              const collectionPerfumes = globalFilteredPerfumes.filter(p => p.collection === collection.id);
+              const collectionPerfumes = globalFilteredPerfumes.filter(
+                (p) => p.collection === collection.id
+              );
               // Conditionally render collection section only if there are perfumes for it
               if (collectionPerfumes.length > 0) {
                 return (
                   <section key={collection.id} className="mb-12">
-                    <img src={collection.logo} alt={`${collection.name} logo`} className="h-16 w-auto mb-4 mx-auto" />
-                    <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center text-elysian-gold">
-                      {collection.name}
-                    </h2>
+                    <img
+                      src={collection.logo}
+                      alt={`${collection.name} logo`}
+                      className="h-32 w-auto mb-4 mx-auto"
+                    />
                     <PerfumeList perfumes={collectionPerfumes} />
                   </section>
                 );

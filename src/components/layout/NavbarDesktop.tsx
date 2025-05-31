@@ -1,10 +1,17 @@
-import { useAuth } from '@/contexts/AuthContext';
-import { useCart } from '@/contexts/CartContext';
-import { Button } from '@/components/ui/button';
-import { ShoppingBag, User, LogOut } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Badge } from '@/components/ui/badge';
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
+import { Button } from "@/components/ui/button";
+import { ShoppingBag, User, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 
 export function NavbarDesktop() {
   const { user, logout, isAdmin } = useAuth();
@@ -18,16 +25,28 @@ export function NavbarDesktop() {
         </Link>
 
         <div className="flex items-center space-x-10">
-          <Link to="/" className="text-elysian-white-soft hover:text-elysian-gold transition-colors">
+          <Link
+            to="/"
+            className="text-elysian-white-soft hover:text-elysian-gold transition-colors"
+          >
             Inicio
           </Link>
-          <Link to="/catalogo" className="text-elysian-white-soft hover:text-elysian-gold transition-colors">
+          <Link
+            to="/catalogo"
+            className="text-elysian-white-soft hover:text-elysian-gold transition-colors"
+          >
             Catálogo
           </Link>
-          <Link to="/sobre-nosotros" className="text-elysian-white-soft hover:text-elysian-gold transition-colors">
+          <Link
+            to="/sobre-nosotros"
+            className="text-elysian-white-soft hover:text-elysian-gold transition-colors"
+          >
             Sobre Nosotros
           </Link>
-          <Link to="/contacto" className="text-elysian-white-soft hover:text-elysian-gold transition-colors">
+          <Link
+            to="/contacto"
+            className="text-elysian-white-soft hover:text-elysian-gold transition-colors"
+          >
             Contacto
           </Link>
         </div>
@@ -36,26 +55,38 @@ export function NavbarDesktop() {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost\" className="relative rounded-full h-10 w-10 border border-elysian-gold/30 hover:bg-elysian-gold/10">
+                <Button
+                  variant="ghost"
+                  className="relative rounded-full h-10 w-10 border border-elysian-gold/30 hover:bg-elysian-gold/10"
+                >
                   <User className="h-5 w-5 text-elysian-gold" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-elysian-gray-dark border-elysian-gold/30 text-elysian-white-soft">
+              <DropdownMenuContent
+                align="end"
+                className="bg-elysian-gray-dark border-elysian-gold/30 text-elysian-white-soft"
+              >
                 <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-elysian-gold/20" />
                 <DropdownMenuItem className="hover:bg-elysian-gold/10">
-                  <Link to="/perfil" className="w-full">Perfil</Link>
+                  <Link to="/perfil" className="w-full">
+                    Perfil
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="hover:bg-elysian-gold/10">
-                  <Link to="/pedidos" className="w-full">Mis Pedidos</Link>
+                  <Link to="/pedidos" className="w-full">
+                    Mis Pedidos
+                  </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
                   <DropdownMenuItem className="hover:bg-elysian-gold/10">
-                    <Link to="/admin" className="w-full">Administración</Link>
+                    <Link to="/admin" className="w-full">
+                      Administración
+                    </Link>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator className="bg-elysian-gold/20" />
-                <DropdownMenuItem 
+                <DropdownMenuItem
                   className="hover:bg-elysian-gold/10 cursor-pointer"
                   onClick={logout}
                 >
@@ -65,12 +96,15 @@ export function NavbarDesktop() {
             </DropdownMenu>
           ) : (
             <Link to="/login">
-              <Button variant="outline" className="border-elysian-gold text-elysian-gold hover:bg-elysian-gold hover:text-elysian-background">
+              <Button
+                variant="outline"
+                className="border-elysian-gold text-elysian-gold hover:bg-elysian-gold hover:text-elysian-background"
+              >
                 Iniciar Sesión
               </Button>
             </Link>
           )}
-          
+
           <Link to="/carrito">
             <Button variant="ghost" className="relative">
               <ShoppingBag className="h-5 w-5 text-elysian-gold" />

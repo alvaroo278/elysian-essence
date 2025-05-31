@@ -11,6 +11,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        spitzkant: ["Spitzkant", "Playfair Display", "serif"],
+        display: ["Spitzkant", "Playfair Display", "serif"],
+        sans: ["Spitzkant", "Montserrat", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

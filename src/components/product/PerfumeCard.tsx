@@ -4,7 +4,7 @@ import { useCart } from "@/contexts/CartContext";
 import { ShoppingBag, Heart } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { formatPrice } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface PerfumeCardProps {
@@ -14,8 +14,10 @@ interface PerfumeCardProps {
 export function PerfumeCard({ perfume }: PerfumeCardProps) {
   const { addItem } = useCart();
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevenir que se active el click del card
     addItem(perfume, 1);
     toast({
       title: "Añadido al carrito",
@@ -24,11 +26,21 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
     });
   };
 
+  const handleCardClick = () => {
+    navigate(`/perfume/${perfume.id}`);
+  };
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevenir que se active el click del card
+    // Aquí puedes agregar la lógica para favoritos
+  };
+
   return (
     <div
-      className="card-product h-full flex flex-col relative"
+      className="card-product h-full flex flex-col relative cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleCardClick}
     >
       <div className="relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
         <img
@@ -46,6 +58,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
             variant="ghost"
             size="icon"
             className="rounded-full bg-elysian-background/30 backdrop-blur-sm hover:bg-elysian-gold/30"
+            onClick={handleFavoriteClick}
           >
             <Heart className="h-5 w-5 text-elysian-white-soft hover:text-elysian-gold" />
           </Button>
@@ -61,12 +74,9 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
           <span className="text-sm text-elysian-white-soft/70 mb-1">
             {perfume.collection}
           </span>
-          <Link
-            to={`/perfume/${perfume.id}`}
-            className="text-lg font-semibold text-elysian-white-soft hover:text-elysian-gold transition-colors"
-          >
+          <h3 className="text-lg font-semibold text-elysian-white-soft hover:text-elysian-gold transition-colors">
             {perfume.name}
-          </Link>
+          </h3>
           <div className="flex justify-between items-center mt-2">
             <span className="text-elysian-gold font-medium">
               {formatPrice(perfume.price)}

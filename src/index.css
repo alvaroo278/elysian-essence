@@ -1,3 +1,28 @@
+/* Fuentes personalizadas Spitzkant */
+@font-face {
+  font-family: "Spitzkant";
+  src: url("/fonts/spitzkant-head-light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spitzkant";
+  src: url("/fonts/spitzkant-head-medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spitzkant";
+  src: url("/fonts/spitzkant-head-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,30 +53,46 @@
 }
 
 body {
-  font-family: 'Playfair Display', serif;
+  font-family: "Spitzkant", "Playfair Display", serif;
   margin: 0;
   padding: 0;
-  background-color: #0A0A0A;
-  color: #F5F5F5;
+  background-color: #0a0a0a;
+  color: #f5f5f5;
 }
 
 @layer components {
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
+  /* Clases de utilidad para fuentes Spitzkant */
+  .font-spitzkant-light {
+    font-family: "Spitzkant", serif;
+    font-weight: 300;
+  }
+
+  .font-spitzkant-medium {
+    font-family: "Spitzkant", serif;
+    font-weight: 500;
+  }
+
+  .font-spitzkant-bold {
+    font-family: "Spitzkant", serif;
+    font-weight: 700;
+  }
+
   .gold-gradient {
     @apply bg-gradient-to-r from-elysian-gold to-elysian-gold-light;
   }
-  
+
   .gold-text {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-elysian-gold to-elysian-gold-light;
   }
-  
+
   .btn-gold {
     @apply bg-elysian-gold hover:bg-elysian-gold-light text-elysian-background font-medium py-2 px-4 rounded transition-all duration-200;
   }
-  
+
   .card-product {
     @apply bg-elysian-gray-dark rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:scale-105;
   }

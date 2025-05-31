@@ -131,9 +131,11 @@ export function ProductDetailPage() {
 
             <div className="flex items-center">
               <span className="text-elysian-white-soft/70 text-sm mr-2">
-                Marca:
+                Colección:
               </span>
-              <span className="text-elysian-white-soft">{perfume.brand}</span>
+              <span className="text-elysian-white-soft">
+                {perfume.collection}
+              </span>
             </div>
 
             <Separator className="bg-elysian-gold/20 my-2" />

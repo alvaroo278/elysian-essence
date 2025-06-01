@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom"; // Changed Link to NavLink
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
@@ -31,124 +31,176 @@ export function NavbarMobile() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="border-b border-elysian-gold/20 py-4 bg-black/80 backdrop-blur-md sticky top-0 z-50">
-      <div className="container-custom flex items-center justify-between">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-elysian-gold">
-              <Menu />
-            </Button>
-          </SheetTrigger>
-          <SheetContent
-            side="left"
-            className="bg-elysian-gray-dark border-r border-elysian-gold/20 text-elysian-white-soft"
-          >
-            <SheetHeader>
-              <SheetTitle className="text-elysian-gold">Menú</SheetTitle>
-            </SheetHeader>
-            <div className="mt-8 flex flex-col space-y-4">
-              <Link
-                to="/"
-                className="flex items-center py-2"
-                onClick={closeMenu}
+    <nav className="py-4 bg-transparent backdrop-blur-sm sticky top-0 z-50">
+      <div className="container-custom">
+        <div className="grid grid-cols-3 items-center">
+          {/* Sección izquierda - Menú hamburguesa */}
+          <div className="flex justify-start">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-elysian-gold hover:bg-white/10">
+                  <Menu />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="bg-black/95 backdrop-blur-md border-r border-white/10 text-elysian-white-soft"
               >
-                <Home className="mr-2 h-5 w-5 text-elysian-gold" />
-                <span>Inicio</span>
-              </Link>
-              <Link
-                to="/catalogo"
-                className="flex items-center py-2"
-                onClick={closeMenu}
-              >
-                <Book className="mr-2 h-5 w-5 text-elysian-gold" />
-                <span>Catálogo</span>
-              </Link>
-              <Link
-                to="/sobre-nosotros"
-                className="flex items-center py-2"
-                onClick={closeMenu}
-              >
-                <Info className="mr-2 h-5 w-5 text-elysian-gold" />
-                <span>Sobre Nosotros</span>
-              </Link>
-              <Link
-                to="/contacto"
-                className="flex items-center py-2"
-                onClick={closeMenu}
-              >
-                <Mail className="mr-2 h-5 w-5 text-elysian-gold" />
-                <span>Contacto</span>
-              </Link>
-
-              <Separator className="bg-elysian-gold/20 my-2" />
-
-              {user ? (
-                <>
-                  <Link
-                    to="/perfil\"
-                    className="flex items-center py-2\"
+                <SheetHeader>
+                  <SheetTitle className="text-elysian-gold">Menú</SheetTitle>
+                </SheetHeader>
+                <div className="mt-8 flex flex-col space-y-2">
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                        ? "text-elysian-gold bg-white/5"
+                        : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                      }`
+                    }
                     onClick={closeMenu}
                   >
-                    <User className="mr-2 h-5 w-5 text-elysian-gold" />
-                    <span>Mi Perfil</span>
-                  </Link>
-                  <Link
-                    to="/pedidos"
-                    className="flex items-center py-2"
+                    <Home className="mr-3 h-5 w-5 text-elysian-gold" />
+                    <span>Inicio</span>
+                  </NavLink>
+                  <NavLink
+                    to="/catalogo"
+                    className={({ isActive }) =>
+                      `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                        ? "text-elysian-gold bg-white/5"
+                        : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                      }`
+                    }
                     onClick={closeMenu}
                   >
-                    <ShoppingBag className="mr-2 h-5 w-5 text-elysian-gold" />
-                    <span>Mis Pedidos</span>
-                  </Link>
-                  {isAdmin && (
-                    <Link
-                      to="/admin"
-                      className="flex items-center py-2"
+                    <Book className="mr-3 h-5 w-5 text-elysian-gold" />
+                    <span>Catálogo</span>
+                  </NavLink>
+                  <NavLink
+                    to="/sobre-nosotros"
+                    className={({ isActive }) =>
+                      `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                        ? "text-elysian-gold bg-white/5"
+                        : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                      }`
+                    }
+                    onClick={closeMenu}
+                  >
+                    <Info className="mr-3 h-5 w-5 text-elysian-gold" />
+                    <span>Sobre Nosotros</span>
+                  </NavLink>
+                  <NavLink
+                    to="/contacto"
+                    className={({ isActive }) =>
+                      `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                        ? "text-elysian-gold bg-white/5"
+                        : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                      }`
+                    }
+                    onClick={closeMenu}
+                  >
+                    <Mail className="mr-3 h-5 w-5 text-elysian-gold" />
+                    <span>Contacto</span>
+                  </NavLink>
+                  <Separator className="bg-elysian-gold/20 my-2" />
+                  {user ? (
+                    <>
+                      <NavLink
+                        to="/perfil"
+                        className={({ isActive }) =>
+                          `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                            ? "text-elysian-gold bg-white/5"
+                            : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                          }`
+                        }
+                        onClick={closeMenu}
+                      >
+                        <User className="mr-3 h-5 w-5 text-elysian-gold" />
+                        <span>Mi Perfil</span>
+                      </NavLink>
+                      <NavLink
+                        to="/pedidos"
+                        className={({ isActive }) =>
+                          `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                            ? "text-elysian-gold bg-white/5"
+                            : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                          }`
+                        }
+                        onClick={closeMenu}
+                      >
+                        <ShoppingBag className="mr-3 h-5 w-5 text-elysian-gold" />
+                        <span>Mis Pedidos</span>
+                      </NavLink>
+                      {isAdmin && (
+                        <NavLink
+                          to="/admin"
+                          className={({ isActive }) =>
+                            `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                              ? "text-elysian-gold bg-white/5"
+                              : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                            }`
+                          }
+                          onClick={closeMenu}
+                        >
+                          <span className="mr-3 text-elysian-gold">⚙️</span>
+                          <span>Administración</span>
+                        </NavLink>
+                      )}
+                      <button
+                        className="flex items-center py-3 px-3 w-full rounded-md text-base text-elysian-white-soft hover:text-white hover:bg-white/5 text-left"
+                        onClick={() => {
+                          logout();
+                          closeMenu();
+                        }}
+                      >
+                        <LogOut className="mr-3 h-5 w-5 text-elysian-gold" />
+                        <span>Cerrar Sesión</span>
+                      </button>
+                    </>
+                  ) : (
+                    <NavLink
+                      to="/login"
+                      className={({ isActive }) =>
+                        `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
+                          ? "text-elysian-gold bg-white/5"
+                          : "text-elysian-white-soft hover:text-white hover:bg-white/5"
+                        }`
+                      }
                       onClick={closeMenu}
                     >
-                      <span className="mr-2 text-elysian-gold">⚙️</span>
-                      <span>Administración</span>
-                    </Link>
+                      <User className="mr-3 h-5 w-5 text-elysian-gold" />
+                      <span>Iniciar Sesión</span>
+                    </NavLink>
                   )}
-                  <button
-                    className="flex items-center py-2 text-left w-full"
-                    onClick={() => {
-                      logout();
-                      closeMenu();
-                    }}
-                  >
-                    <LogOut className="mr-2 h-5 w-5 text-elysian-gold" />
-                    <span>Cerrar Sesión</span>
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  className="flex items-center py-2"
-                  onClick={closeMenu}
-                >
-                  <User className="mr-2 h-5 w-5 text-elysian-gold" />
-                  <span>Iniciar Sesión</span>
-                </Link>
-              )}
-            </div>
-          </SheetContent>
-        </Sheet>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
 
-        <Link to="/" className="flex items-center">
-          <span className="text-xl font-bold gold-text">Elysian Essence</span>
-        </Link>
+          {/* Sección central - Logo */}
+          <div className="flex justify-center">
+            <Link to="/" className="flex items-center">
+              <span className="text-xl font-bold gold-text">Elysian Essence</span>
+            </Link>
+          </div>
 
-        <Link to="/carrito">
-          <Button variant="ghost" className="relative">
-            <ShoppingBag className="h-5 w-5 text-elysian-gold" />
-            {totalItems > 0 && (
-              <Badge className="absolute -top-2 -right-2 bg-elysian-gold text-elysian-background">
-                {totalItems}
-              </Badge>
-            )}
-          </Button>
-        </Link>
+          {/* Sección derecha - Carrito */}
+          <div className="flex justify-end">
+            <Link to="/carrito">
+              <Button
+                variant="ghost"
+                className="relative hover:bg-white/10 p-2 rounded-full"
+              >
+                <ShoppingBag className="h-5 w-5 text-elysian-gold" />
+                {totalItems > 0 && (
+                  <Badge className="absolute -top-2 -right-2 bg-elysian-gold text-elysian-background">
+                    {totalItems}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );

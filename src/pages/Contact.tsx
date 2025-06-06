@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export function ContactPage() {
@@ -184,22 +184,6 @@ export function ContactPage() {
                     <h3 className="text-elysian-white font-medium">Teléfono</h3>
                     <p className="text-elysian-white-soft">+1 (555) 123-4567</p>
                     <p className="text-elysian-white-soft">+1 (555) 987-6543</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-elysian-gold mt-1" />
-                  <div>
-                    <h3 className="text-elysian-white font-medium">
-                      Dirección
-                    </h3>
-                    <p className="text-elysian-white-soft">
-                      123 Fragrance Avenue
-                      <br />
-                      Perfume District, PD 12345
-                      <br />
-                      Ciudad, País
-                    </p>
                   </div>
                 </div>
 

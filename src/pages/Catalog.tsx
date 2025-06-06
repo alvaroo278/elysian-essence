@@ -14,6 +14,7 @@ export function CatalogPage() {
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [activeGenderTab, setActiveGenderTab] = useState<string>("todos");
+  const [selectedCollection, setSelectedCollection] = useState<string>("todas");
   const [searchQuery, setSearchQuery] = useState("");
   const collectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
@@ -88,9 +89,14 @@ export function CatalogPage() {
           activeGenderTab === "hombre"
             ? perfume.gender === "Hombre" || perfume.gender === "Unisex"
             : activeGenderTab === "mujer"
-            ? perfume.gender === "Mujer" || perfume.gender === "Unisex"
-            : true // Should not happen with current tabs
+              ? perfume.gender === "Mujer" || perfume.gender === "Unisex"
+              : true // Should not happen with current tabs
       );
+    }
+
+    // Filter by collection
+    if (selectedCollection !== "todas") {
+      result = result.filter((perfume) => perfume.collection === selectedCollection);
     }
 
     // Filter by search query (name or collection name)
@@ -113,7 +119,7 @@ export function CatalogPage() {
     );
 
     setGlobalFilteredPerfumes(result);
-  }, [mockPerfumes, activeGenderTab, searchQuery, priceRange]);
+  }, [mockPerfumes, activeGenderTab, selectedCollection, searchQuery, priceRange]);
 
   return (
     <main>
@@ -152,6 +158,29 @@ export function CatalogPage() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
+
+          {/* Collection Filter */}
+          <div className="flex justify-center">
+            <Tabs value={selectedCollection} onValueChange={setSelectedCollection}>
+              <TabsList className="bg-elysian-gray-dark border border-elysian-gold/20 flex-wrap h-auto p-1 gap-1">
+                <TabsTrigger
+                  value="todas"
+                  className="data-[state=active]:bg-elysian-gold data-[state=active]:text-elysian-background text-xs px-3 py-2"
+                >
+                  Todas las Colecciones
+                </TabsTrigger>
+                {collections.map((collection) => (
+                  <TabsTrigger
+                    key={collection.id}
+                    value={collection.id}
+                    className="data-[state=active]:bg-elysian-gold data-[state=active]:text-elysian-background text-xs px-3 py-2"
+                  >
+                    {collection.name}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          </div>
 
           <div className="flex flex-col md:flex-row gap-4 items-center max-w-3xl mx-auto">
             <div className="relative flex-1 w-full md:w-auto">

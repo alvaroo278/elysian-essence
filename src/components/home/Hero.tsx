@@ -50,12 +50,6 @@ export function Hero() {
             <Button className="bg-elysian-gold text-elysian-background hover:bg-elysian-gold-light">
               <Link to="/catalogo">Explorar Catálogo</Link>
             </Button>
-            <Button
-              variant="outline"
-              className="border-elysian-gold text-elysian-gold hover:bg-elysian-gold/10"
-            >
-              <Link to="/sobre-nosotros">Nuestra Historia</Link>
-            </Button>
           </motion.div>
         </motion.div>
       </div>

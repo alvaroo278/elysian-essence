@@ -33,7 +33,6 @@ export function PerfumeForm({ perfume, onSubmit, onCancel }: PerfumeFormProps) {
     image: perfume?.image || "",
     gender: perfume?.gender || "Hombre",
     featured: perfume?.featured || false,
-    rating: perfume?.rating || 4.5,
     notes: perfume?.notes || [],
   });
 

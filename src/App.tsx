@@ -9,7 +9,6 @@ import { CartPage } from "@/pages/Cart";
 import { CheckoutPage } from "@/pages/Checkout";
 import { LoginPage } from "@/pages/Login";
 import { AdminPage } from "@/pages/Admin";
-import { AboutUsPage } from "@/pages/AboutUs";
 import { ContactPage } from "@/pages/Contact";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -33,7 +32,6 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/sobre-nosotros" element={<AboutUsPage />} />
           <Route path="/contacto" element={<ContactPage />} />
         </Routes>
       </div>

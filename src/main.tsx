@@ -15,7 +15,7 @@ document.title = "Elysian Essence | Perfumes de Lujo";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_relativeSplatPath: true }}>
       <AuthProvider>
         <CartProvider>
           <App />

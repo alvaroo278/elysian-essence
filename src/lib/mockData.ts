@@ -45,7 +45,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/yara-tous.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.8,
     notes: ["Vainilla", "Pachulí", "Ámbar"],
   },
   {
@@ -58,7 +57,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/yara.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.6,
     notes: ["Rosa", "Azafrán", "Oud"],
   },
   {
@@ -70,7 +68,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/yara-moi.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.7,
     notes: ["Ámbar", "Sándalo", "Incienso"],
   },
   {
@@ -82,7 +79,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/yara-candy.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.5,
     notes: ["Jazmín", "Vainilla", "Almizcle"],
   },
   {
@@ -94,7 +90,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/asad-bourbon.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.9,
     notes: ["Oud", "Rosa", "Cardamomo"],
   },
   {
@@ -106,7 +101,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/asad.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.4,
     notes: ["Gardenia", "Almizcle", "Cedro"],
   },
   {
@@ -118,7 +112,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/ameerat-al-arab.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.6,
     notes: ["Canela", "Clavo", "Sándalo"],
   },
   {
@@ -130,7 +123,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/asad-zanzibar.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.7,
     notes: ["Ámbar", "Vainilla", "Benjuí"],
   },
   {
@@ -143,7 +135,6 @@ export const perfumes: Perfume[] = [
     image: "/lattafa/prive-rose.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.5,
     notes: ["Bergamota", "Oud", "Pachulí"],
   },
 
@@ -157,7 +148,6 @@ export const perfumes: Perfume[] = [
     image: "/armaf/tag-femme.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.7,
     notes: ["Bergamota", "Cedro", "Sal Marina"],
   },
   {
@@ -169,7 +159,6 @@ export const perfumes: Perfume[] = [
     image: "/armaf/lionheart-men.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.8,
     notes: ["Cuero", "Cardamomo", "Vetiver"],
   },
   {
@@ -181,7 +170,6 @@ export const perfumes: Perfume[] = [
     image: "/armaf/lionheart-woman.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.6,
     notes: ["Agua", "Lirio", "Musgo"],
   },
   {
@@ -193,7 +181,6 @@ export const perfumes: Perfume[] = [
     image: "/armaf/club-de-nuit-women.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.8,
     notes: ["Ozono", "Vetiver", "Ámbar Gris"],
   },
   {
@@ -205,7 +192,6 @@ export const perfumes: Perfume[] = [
     image: "/armaf/club-de-nuit-sillage.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.5,
     notes: ["Iris", "Almizcle Blanco", "Cedro"],
   },
   {
@@ -217,7 +203,6 @@ export const perfumes: Perfume[] = [
     image: "/armaf/club-nuit-iconic.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.7,
     notes: ["Pimienta", "Tabaco", "Cuero"],
   },
 
@@ -231,7 +216,6 @@ export const perfumes: Perfume[] = [
     image: "/swiss-arabian/casablanca.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.9,
     notes: ["Rosa Damascena", "Jazmín", "Almizcle"],
   },
   {
@@ -243,7 +227,6 @@ export const perfumes: Perfume[] = [
     image: "/swiss-arabian/saghaf-vanille-toffe.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.6,
     notes: ["Menta", "Eucalipto", "Cedro Blanco"],
   },
   {
@@ -255,7 +238,6 @@ export const perfumes: Perfume[] = [
     image: "/swiss-arabian/shaghaf-oud.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.8,
     notes: ["Oud", "Miel", "Sándalo"],
   },
   {
@@ -267,7 +249,6 @@ export const perfumes: Perfume[] = [
     image: "/swiss-arabian/saghaf-azraq.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.7,
     notes: ["Bergamota", "Lirio", "Almizcle Blanco"],
   },
   {
@@ -279,7 +260,6 @@ export const perfumes: Perfume[] = [
     image: "/swiss-arabian/shaghaf-tonka.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.5,
     notes: ["Pino", "Musgo", "Vetiver"],
   },
   {
@@ -291,7 +271,6 @@ export const perfumes: Perfume[] = [
     image: "/swiss-arabian/shaghaf-ahmar.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.9,
     notes: ["Rosa", "Azafrán", "Oud"],
   },
 
@@ -305,7 +284,6 @@ export const perfumes: Perfume[] = [
     image: "/frence-avenue/pinnace.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.6,
     notes: ["Sándalo", "Pimienta Negra", "Oud"],
   },
   {
@@ -317,7 +295,6 @@ export const perfumes: Perfume[] = [
     image: "/frence-avenue/coconut-leche.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.8,
     notes: ["Rosa", "Peonía", "Almizcle"],
   },
   {
@@ -329,7 +306,6 @@ export const perfumes: Perfume[] = [
     image: "/frence-avenue/diwani-cairo.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.7,
     notes: ["Bergamota", "Lavanda", "Vetiver"],
   },
   {
@@ -341,7 +317,6 @@ export const perfumes: Perfume[] = [
     image: "/frence-avenue/azure-aoud.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.9,
     notes: ["Violeta", "Iris", "Vainilla"],
   },
   {
@@ -353,7 +328,6 @@ export const perfumes: Perfume[] = [
     image: "/frence-avenue/roayl-blend-noir.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.5,
     notes: ["Limón", "Lavanda", "Cedro"],
   },
   {
@@ -365,7 +339,6 @@ export const perfumes: Perfume[] = [
     image: "/frence-avenue/royal-blend.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.8,
     notes: ["Oud", "Rosa", "Ámbar"],
   },
 
@@ -379,7 +352,6 @@ export const perfumes: Perfume[] = [
     image: "/emper/espada-prime.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.7,
     notes: ["Neroli", "Flor de Azahar", "Mandarina"],
   },
   {
@@ -391,7 +363,6 @@ export const perfumes: Perfume[] = [
     image: "/emper/espada-oro.png",
     gender: "Hombre",
     featured: false,
-    rating: 4.6,
     notes: ["Bergamota", "Ámbar", "Sándalo"],
   },
   {
@@ -403,7 +374,6 @@ export const perfumes: Perfume[] = [
     image: "/emper/desert-angel-blue-nigt.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.8,
     notes: ["Peonía", "Almizcle", "Cedro"],
   },
   {
@@ -415,7 +385,6 @@ export const perfumes: Perfume[] = [
     image: "/emper/desert-angel-romance.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.7,
     notes: ["Vetiver", "Tabaco", "Ámbar"],
   },
   {
@@ -427,7 +396,6 @@ export const perfumes: Perfume[] = [
     image: "/emper/desert-angel.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.5,
     notes: ["Cerezo", "Peonía", "Almizcle Blanco"],
   },
   {
@@ -439,7 +407,6 @@ export const perfumes: Perfume[] = [
     image: "/emper/burj-dubai-arina.png",
     gender: "Mujer",
     featured: true,
-    rating: 4.8,
     notes: ["Oud", "Rosa Negra", "Ámbar"],
   },
 
@@ -453,7 +420,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/malaki-secret.png",
     gender: "Hombre",
     featured: true,
-    rating: 4.9,
     notes: ["Ámbar", "Vainilla", "Canela"],
   },
   {
@@ -465,7 +431,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/ikhtiyari.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.7,
     notes: ["Oud", "Rosa", "Incienso"],
   },
   {
@@ -477,7 +442,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/sahr-al-kalimat.png",
     gender: "Unisex",
     featured: true,
-    rating: 4.8,
     notes: ["Jazmín", "Ámbar", "Sándalo"],
   },
   {
@@ -489,7 +453,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/ghubar-al-dhahab.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.6,
     notes: ["Oud", "Cuero", "Especias"],
   },
   {
@@ -501,7 +464,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/dome-casabella.png",
     gender: "Unisex",
     featured: false,
-    rating: 4.5,
     notes: ["Perla", "Lirio", "Almizcle"],
   },
   {
@@ -513,7 +475,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/angel-paradise.png",
     gender: "Mujer",
     featured: true,
-    rating: 4.9,
     notes: ["Azafrán", "Oud", "Rosa"],
   },
   {
@@ -525,7 +486,6 @@ export const perfumes: Perfume[] = [
     image: "/camara/oxana-black.png",
     gender: "Mujer",
     featured: false,
-    rating: 4.7,
     notes: ["Gardenia", "Sándalo", "Vainilla"],
   },
 ];

@@ -10,7 +10,6 @@ import {
   LogOut,
   Home,
   Book,
-  Info,
   Mail,
 } from "lucide-react";
 import {
@@ -75,19 +74,6 @@ export function NavbarMobile() {
                   >
                     <Book className="mr-3 h-5 w-5 text-elysian-gold" />
                     <span>Catálogo</span>
-                  </NavLink>
-                  <NavLink
-                    to="/sobre-nosotros"
-                    className={({ isActive }) =>
-                      `flex items-center py-3 px-3 w-full rounded-md text-base ${isActive
-                        ? "text-elysian-gold bg-white/5"
-                        : "text-elysian-white-soft hover:text-white hover:bg-white/5"
-                      }`
-                    }
-                    onClick={closeMenu}
-                  >
-                    <Info className="mr-3 h-5 w-5 text-elysian-gold" />
-                    <span>Sobre Nosotros</span>
                   </NavLink>
                   <NavLink
                     to="/contacto"
@@ -180,7 +166,13 @@ export function NavbarMobile() {
           {/* Sección central - Logo */}
           <div className="flex justify-center">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold gold-text">Elysian Essence</span>
+              <img
+                src="/logo2.png"
+                alt="Elysian Essence - Perfumes de Lujo"
+                className="h-10 w-auto object-contain transition-all duration-300 hover:scale-105 filter drop-shadow-lg"
+                loading="eager"
+                decoding="async"
+              />
             </Link>
           </div>
 

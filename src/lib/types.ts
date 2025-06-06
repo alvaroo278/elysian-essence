@@ -21,7 +21,6 @@ export interface Perfume {
   image: string;
   gender: "Hombre" | "Mujer" | "Unisex";
   featured?: boolean;
-  rating?: number;
   notes?: string[];
 }
 

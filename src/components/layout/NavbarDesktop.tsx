@@ -192,7 +192,7 @@ export function NavbarDesktop() {
             <NavLink
               to="/catalogo"
               className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${isActive
+                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 whitespace-nowrap ${isActive
                   ? "text-elysian-gold bg-white/5"
                   : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                 }`
@@ -201,20 +201,9 @@ export function NavbarDesktop() {
               Catálogo
             </NavLink>
             <NavLink
-              to="/sobre-nosotros"
-              className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${isActive
-                  ? "text-elysian-gold bg-white/5"
-                  : "text-elysian-white-soft hover:text-white hover:bg-white/5"
-                }`
-              }
-            >
-              Sobre Nosotros
-            </NavLink>
-            <NavLink
               to="/contacto"
               className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${isActive
+                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 whitespace-nowrap ${isActive
                   ? "text-elysian-gold bg-white/5"
                   : "text-elysian-white-soft hover:text-white hover:bg-white/5"
                 }`
@@ -227,7 +216,13 @@ export function NavbarDesktop() {
           {/* Sección central - Logo */}
           <div className="flex justify-center">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold gold-text">Elysian Essence</span>
+              <img
+                src="/logo2.png"
+                alt="Elysian Essence - Perfumes de Lujo"
+                className="h-12 w-auto object-contain transition-all duration-300 hover:scale-105 filter drop-shadow-lg"
+                loading="eager"
+                decoding="async"
+              />
             </Link>
           </div>
 
